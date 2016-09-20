@@ -1,0 +1,16 @@
+---Test Cases---
+Cases that will test if the control system can meet the functional requirements laid out by the lab script.
+
+- Singularities - 
+A singularity can occur when j1 and j2 attempt to move so that they are separated by a distance greater than that of the two
+arms connected to the tool fully extended. So we should test that the system can recognize when this is about to happen and 
+find an alternate path to draw the point (if one exists).
+
+- Drawing Capabilities -
+The system must be able to draw
+-A line (as straight as possible)
+-Curves
+-Shapes, i.e. a square (we are assessed on how close the start and end points are) and a circle (assessed on how smooth the
+curve is)
+-(For completion) have the ability to write words (i.e. "skynet")
+-(For challenge) have the ability to draw pictures (i.e. snowman and elf)
