@@ -1,7 +1,4 @@
- 
-
-
-/**
+ /**
  * Class represents SCARA robotic arm.
  * 
  * @Arthur Roberts
@@ -40,14 +37,14 @@ public class Arm
     
     
     // current state of the arm
-    private double theta1; // angle of the upper arm
-    private double theta2;
+    private double theta1; // angle of the upper arm. X
+    private double theta2; // Y
     
     private double xj1;     // positions of the joints
     private double yj1; 
     private double xj2;
-    private double yj2; 
-    private double xt;     // position of the tool
+    private double yj2;
+    double xt;     // position of the tool
     private double yt;
     private boolean valid_state; // is state of the arm physically possible?
     
@@ -124,20 +121,24 @@ public class Arm
    public void directKinematic(){
        
        // midpoint between joints
-       //double  xa =.... ;
-       //double  ya =.... ;
+       double  xa = xj1 + (0.5 * (xj2 - xj1));
+       double  ya = yj1 + (0.5 * (yj2 - yj1));
        // distance between joints
-       //double d = ...;
+       double d = Math.sqrt(Math.pow((xj2 - xj1), 2) + Math.pow((yj2 - yj1), 2));
        if (d<2*r){
            valid_state = true;
          // half distance between tool positions
-         //double  h = ...;
-         //double alpha= ...;
+         double  h = Math.sqrt(Math.pow(r, 2) - (0.5 * d));
+         double alpha = Math.atan((yj1 - yj2) / (xj2 - xj1));
          // tool position
-        // double xt = ...;
-        // double yt = ...;
-         //  xt2 = xa - h.*cos(alpha-pi/2);
-         //  yt2 = ya - h.*sin(alpha-pi/2);
+         double xt = xa + (h * Math.cos(Math.PI/(2 - alpha)));
+         double yt = ya + (h * Math.sin(Math.PI/(2 - alpha)));
+         double xt2 = xa + (h * Math.cos(Math.PI/(2 - alpha)));
+         double yt2 = xa + (h * Math.sin(Math.PI/(2 - alpha)));
+         
+         //DEFAULT CODE
+         //double  xt2 = xa - h * Math.cos(alpha - Math.PI/2);
+         //double  yt2 = ya - h * Math.sin(alpha- Math.PI/2);
        } else {
            valid_state = false;
         }
@@ -154,8 +155,8 @@ public class Arm
         valid_state = true;
         double dx1 = xt - xm1; 
         double dy1 = yt - ym1;
-        // distance between pem and motor
-        double d1 = ...;
+        // distance between pen and motor
+        // double d1 = ...;
         if (d1>2*r){
             //UI.println("Arm 1 - can not reach");
             valid_state = false;
@@ -175,7 +176,7 @@ public class Arm
             return;
         }
         
-        // theta12 = atan2(yj12 - ym1,xj12-xm1);
+        // theta12 = Math.atan(yj12 - ym1,xj12-xm1);
         double dx2 = xt - xm2; 
         double dy2 = yt - ym2;
         double d2 = ...;
@@ -189,10 +190,10 @@ public class Arm
         
         double h2 = Math.sqrt(r*r - d2*d2/4);
         // elbows positions
-        xj2 = ...;
-        yj2 = ...;
+        //xj2 = ...;
+        //yj2 = ...;
         // motor angles for both 1st elbow positions
-        theta2 = ...;
+        //theta2 = ...;
         if ((theta2>0)||(theta2<-Math.PI)){
             valid_state = false;
             //UI.println("Ange 2 -invalid");
