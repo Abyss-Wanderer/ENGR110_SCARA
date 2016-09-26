@@ -36,7 +36,7 @@ public class Main{
         UI.addButton("Save path Ang", this::save_ang);
         UI.addButton("Load path Ang:Play", this::load_ang);
                 
-       // UI.addButton("Quit", UI::quit);
+        UI.addButton("Quit", UI::quit);
         UI.setMouseMotionListener(this::doMouse);
         UI.setKeyListener(this::doKeys);
 
@@ -51,13 +51,19 @@ public class Main{
     
     public void doKeys(String action){
         UI.printf("Key :%s \n", action);
-        if (action.equals("b")) {
+        if (action.equals("i")) {
+        	// point - inverse point kinematics 
+        	state = 1;
+        }
+        else if (action.equals("e")) {
+        	// enter path. Each click adds a point
+        	state = 2;
+        }   
+        else if (action.equals("b")) {
             // break - stop entering the lines
             state = 3;
             //
-          
         }
-               
     }
     
     
