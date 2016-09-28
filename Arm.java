@@ -39,6 +39,8 @@ public class Arm
     // current state of the arm
     private double theta1; // angle of the upper arm
     private double theta2;
+    private int pulse1;
+    private int pulse2;
 
     private double xj1;     // positions of the joints
     private double yj1; 
@@ -163,14 +165,14 @@ public class Arm
         double l1 = d1/2;
         double h1 = Math.sqrt(r*r - d1*d1/4);
         // elbows positions
-        
+
         double xa1 = xm1 + (xt-xm1)/2;
         double ya1 = ym1 + (yt-ym1)/2;
         double alpha1 = (Math.PI/2) - Math.atan2(ym1 - yt, xt - xm1);   //changed
-        
+
         xj1 = xa1 - h1*Math.cos(alpha1);
         yj1 = ya1 - h1*Math.sin(alpha1);
-        
+
         theta1 = Math.atan2(yj1 - ym1, xj1 - xm1);
         if ((theta1>0)||(theta1<-Math.PI)){
             valid_state = false;
@@ -193,11 +195,11 @@ public class Arm
         double h2 = Math.sqrt(r*r - d2*d2/4);
         double potenuse = Math.sqrt(l2*l2 + h2*h2);
         // elbows positions
-        
+
         double xa2 = xm2 + (xt-xm2)/2;
         double ya2 = ym2 + (yt-ym2)/2;
         double alpha2 = (Math.PI/2) - Math.atan2(ym2 - yt, xt - xm2);
-        
+
         xj2 = xa2 + h2*Math.cos(alpha2);
         yj2 = ya2 + h2*Math.sin(alpha2);
         // motor angles for both 1st elbow positions
@@ -208,11 +210,27 @@ public class Arm
             return;
         }
 
+        //calculate pulses from theta1 and theta2
+        findPWM1(-(theta1*180/Math.PI));
+        if(pulse1>=2000)valid_state = false;
+        findPWM2(-(theta2*180/Math.PI));
+        if(pulse2>=2000)valid_state = false;
+        
         UI.printf("xt:%3.1f, yt:%3.1f\n",xt,yt);
         UI.printf("theta1:%3.1f, theta2:%3.1f\n",theta1*180/Math.PI,theta2*180/Math.PI);
         return;
     }
 
+    public void findPWM1(double theta){
+        int temp = (int)((theta*10.7)+348.8);
+        pulse1 = temp;
+    }
+    
+    public void findPWM2(double theta){
+        int temp = (int)((theta*10.4)+827.2);
+        pulse2 = temp;    
+    }
+    
     // returns angle of motor 1
     public double get_theta1(){
         return theta1;
@@ -221,6 +239,15 @@ public class Arm
     public double get_theta2(){
         return theta2;
     }
+    //returns the pulse for motor 1
+    public int get_pulse1(){
+        return pulse1;
+    }
+    //returns the pulse for motor 2
+    public int get_pulse2(){
+        return pulse2;
+    }
+
     // sets angle of the motors
     public void set_angles(double t1, double t2){
         theta1 = t1;
@@ -231,14 +258,12 @@ public class Arm
     // for motor to be in position(angle) theta1
     // linear intepolation
     public int get_pwm1(){
-        int pwm = 0;
-        return pwm;
+        return pulse1;
     }
     // ditto for motor 2
     public int get_pwm2(){
-        int pwm =0;
-       // pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
-        return pwm;
+        //int pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
+        return pulse2;
     }
 
 }
