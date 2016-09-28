@@ -1,6 +1,5 @@
-
 /**
- * ToolPath stores motor control signals (pwm)
+ * ToolPath stores motor contol signals (pwm)
  * and motor angles
  * for given drawing and arm configuration.
  * Arm hardware takes sequence of pwm values 
@@ -9,7 +8,6 @@
  * @1000000.0
  */
 import ecs100.UI;
-import ecs100.UIFileChooser;
 import java.util.*;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +20,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 
 public class ToolPath
 {
@@ -37,22 +34,23 @@ public class ToolPath
     ArrayList<Integer> pwm1_vector;
     ArrayList<Integer> pwm2_vector;
     ArrayList<Integer> pwm3_vector;
-
-
+    
+    private PointXY xy; 
+    private Drawing drawing;
     /**
      * Constructor for objects of class ToolPath
      */
     public ToolPath()
     {
         // initialise instance variables
-        n_steps = 50;
+        n_steps = 5;
         theta1_vector = new ArrayList<Double>();
         theta2_vector = new ArrayList<Double>();
         pen_vector = new ArrayList<Integer>();
         pwm1_vector = new ArrayList<Integer>();
         pwm2_vector = new ArrayList<Integer>();
         pwm3_vector = new ArrayList<Integer>();
-
+        
     }
 
     /**********CONVERT (X,Y) PATH into angles******************/
@@ -101,13 +99,14 @@ public class ToolPath
         } catch (IOException e) {
             UI.println("Problem writing to the file statsTest.txt");
         }
+
     }
 
     // takes sequence of angles and converts it 
     // into sequence of motor signals
-    public void convert_angles_to_pwm(Drawing drawing, Arm arm, String fname){
-        // for each angle
-        for (int i=0 ; i < drawing.get_drawing_size()-1;i++){
+    public void convert_angles_to_pwm(Drawing drawing,Arm arm,String fname){
+        // for all points of the drawing...        
+        for (int i = 0;i < drawing.get_drawing_size()-1;i++){ 
             // take two points
             PointXY p0 = drawing.get_drawing_point(i);
             PointXY p1 = drawing.get_drawing_point(i+1);
@@ -120,15 +119,23 @@ public class ToolPath
                 pwm2_vector.add(arm.get_pwm2());
                 if (p0.get_pen()){ 
                     pwm3_vector.add(1000);
-                } else {
+                }
+                else {
                     pwm3_vector.add(2000);
                 }
             }
         }
+        
     }
 
-    // save file with motor control values
+    //save file with motor control values
     public void save_pwm_file(String fname){
+        
+        for ( int i = 0 ; i < pwm1_vector.size(); i++){
+            UI.printf(" pwm1=%d pwm2=%d pwm3=%d\n",
+                pwm1_vector.get(i), pwm2_vector.get(i), pwm3_vector.get(i));
+        }
+
         try {
             //Whatever the file path is.
             File statText = new File(fname);
@@ -136,14 +143,23 @@ public class ToolPath
             OutputStreamWriter osw = new OutputStreamWriter(is);    
             Writer w = new BufferedWriter(osw);
             String str_out;
+            
             for (int i = 1; i < pwm1_vector.size() ; i++){
-                    str_out = String.format("%d,%d,%d\n", pwm1_vector.get(i),pwm2_vector.get(i), pwm3_vector.get(i));
-                    w.write(str_out);
+                if(i==1 && i==2 || i == pwm1_vector.size() - 1){
+                    str_out = String.format("%d,%d,%d\n",
+                    pwm1_vector.get(i), pwm2_vector.get(i), 2000);
+                }
+                else{
+                str_out = String.format("%d,%d,%d\n",
+                    pwm1_vector.get(i), pwm2_vector.get(i), pwm3_vector.get(i));
+                }
+                w.write(str_out);
             }
             w.close();
         } catch (IOException e) {
             UI.println("Problem writing to the file statsTest.txt");
         }
-
+        
     }
+
 }
