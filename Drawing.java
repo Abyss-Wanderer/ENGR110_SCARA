@@ -1,12 +1,10 @@
 /**
- * ToolPath stores motor contol signals (pwm)
- * and motor angles
- * for given drawing and arm configuration.
- * Arm hardware takes sequence of pwm values 
- * to drive the motors
- * @Arthur Roberts 
- * @1000000.0
+ * Class represents the drawing as set of (x,y) points.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
  */
+
 import ecs100.UI;
 import java.util.*;
 import java.io.BufferedWriter;
@@ -21,137 +19,100 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ToolPath
+import java.awt.Color;
+
+public class Drawing
 {
-    int n_steps; //straight line segmentt will be broken
-    // into that many sections
 
-    // storage for angles and 
-    // moto control signals
-    ArrayList<Double> theta1_vector;
-    ArrayList<Double> theta2_vector;
-    ArrayList<Integer> pen_vector;
-    ArrayList<Integer> pwm1_vector;
-    ArrayList<Integer> pwm2_vector;
-    ArrayList<Integer> pwm3_vector;
-    
-    private PointXY xy; 
-    private Drawing drawing;
+    // set of points
+    private ArrayList<PointXY> path;
+    private boolean showSnowman;
+
     /**
-     * Constructor for objects of class ToolPath
+     * Constructor for objects of class Drawing
      */
-    public ToolPath()
+    public Drawing()
     {
-        // initialise instance variables
-        n_steps = 5;
-        theta1_vector = new ArrayList<Double>();
-        theta2_vector = new ArrayList<Double>();
-        pen_vector = new ArrayList<Integer>();
-        pwm1_vector = new ArrayList<Integer>();
-        pwm2_vector = new ArrayList<Integer>();
-        pwm3_vector = new ArrayList<Integer>();
-        
+        path = new ArrayList<PointXY>();
     }
 
-    /**********CONVERT (X,Y) PATH into angles******************/
-    public void convert_drawing_to_angles(Drawing drawing,Arm arm,String fname){
+    public void add_point_to_path(double x, double y,boolean pen)
+    {
+        PointXY new_point = new PointXY(x,y,pen);
+        path.add(new_point);
+        UI.printf("Pioint added.x=%f y=%f pen=%b New path size - %d\n",
+            x,y,pen,path.size());
+    }
 
-        // for all points of the drawing...        
-        for (int i = 0;i < drawing.get_drawing_size()-1;i++){ 
-            // take two points
-            PointXY p0 = drawing.get_drawing_point(i);
-            PointXY p1 = drawing.get_drawing_point(i+1);
-            // break line between points into segments: n_steps of them
-            for ( int j = 0 ; j< n_steps;j++) { // break segment into n_steps str. lines
-                double x = p0.get_x() + j*(p1.get_x()-p0.get_x())/n_steps;
-                double y = p0.get_y() + j*(p1.get_y()-p0.get_y())/n_steps;
-                arm.inverseKinematic(x, y);
-                theta1_vector.add(arm.get_theta1()*180/Math.PI);
-                theta2_vector.add(arm.get_theta2()*180/Math.PI);
-                if (p0.get_pen()){ 
-                    pen_vector.add(1);
+    public void print_path(){
+        UI.printf("*************************\n");
+        for (int i = 0; i < path.size();i++){
+
+            double x0 = path.get(i).get_x();
+            double y0 = path.get(i).get_y();
+            boolean p = path.get(i).get_pen();
+            UI.printf("i=%d x=%f y=%f pen=%b\n",i,x0,y0,p);
+        }
+        UI.printf("*************************\n");
+    }
+    
+    public void changeShowSnowman(){
+        showSnowman = !showSnowman;
+    }
+
+    public void draw(){
+        //draw path
+        for (int i = 1; i < path.size() ; i++){
+            PointXY p0 = get_drawing_point(i-1);
+            PointXY p1 = get_drawing_point(i); 
+            if (path.get(i).get_pen()){
+                UI.setLineWidth(2);
+                UI.setColor(Color.BLUE); //pen down part
+            } else {
+                UI.setColor(Color.LIGHT_GRAY); // pen uo
+            }
+            UI.drawLine(p0.get_x(), p0.get_y(), p1.get_x(), p1.get_y());
+            //UI.setColor(Color.red);
+            //UI.drawLine(230, 130, 430, 130);
+            //UI.drawRect(270, 80, 105, 105);
+            //UI.drawOval(260, 70, 115, 115);
+            //UI.setFontSize(58);
+            //UI.drawString("SKYNET", 220, 170);
+            //UI.setFontSize(12);
+            if (showSnowman){
+                UI.drawImage("snowman.png", 190, 25);
+            }
+        }
+    }
+
+    public int get_path_size(){
+        return path.size();
+    }
+
+    //pen_down = false for last point
+    public void path_raise_pen(){
+        path.get(path.size()-1).set_pen(false);
+    }
+
+    public PointXY get_path_last_point(){
+        PointXY lp = path.get(path.size()-1);
+        return lp;
+    }
+
+    public void save_path(String fname){
+
+        try {
+            //Whatever the file path is.
+            File statText = new File(fname);
+            FileOutputStream is = new FileOutputStream(statText);
+            OutputStreamWriter osw = new OutputStreamWriter(is);    
+            Writer w = new BufferedWriter(osw);
+            String str_out; 
+            for (int i = 1; i < path.size() ; i++){
+                if (path.get(i).get_pen()) {
+                    str_out = path.get(i).get_x() +" "+ path.get(i).get_y() +" 1\n";
                 } else {
-                    pen_vector.add(0);
-                }
-            }
-        }
-    }
-
-    public void save_angles(String fname){
-        for ( int i = 0 ; i < theta1_vector.size(); i++){
-            UI.printf(" t1=%3.1f t2=%3.1f pen=%d\n",
-                theta1_vector.get(i),theta2_vector.get(i),pen_vector.get(i));
-        }
-
-        try {
-            //Whatever the file path is.
-            File statText = new File(fname);
-            FileOutputStream is = new FileOutputStream(statText);
-            OutputStreamWriter osw = new OutputStreamWriter(is);    
-            Writer w = new BufferedWriter(osw);
-            String str_out;
-            for (int i = 1; i < theta1_vector.size() ; i++){
-                str_out = String.format("%3.1f,%3.1f,%d\n",
-                    theta1_vector.get(i),theta2_vector.get(i),pen_vector.get(i));
-                w.write(str_out);
-            }
-            w.close();
-        } catch (IOException e) {
-            UI.println("Problem writing to the file statsTest.txt");
-        }
-
-    }
-
-    // takes sequence of angles and converts it 
-    // into sequence of motor signals
-    public void convert_angles_to_pwm(Drawing drawing,Arm arm,String fname){
-        // for all points of the drawing...        
-        for (int i = 0;i < drawing.get_drawing_size()-1;i++){ 
-            // take two points
-            PointXY p0 = drawing.get_drawing_point(i);
-            PointXY p1 = drawing.get_drawing_point(i+1);
-            // break line between points into segments: n_steps of them
-            for ( int j = 0 ; j< n_steps;j++) { // break segment into n_steps str. lines
-                double x = p0.get_x() + j*(p1.get_x()-p0.get_x())/n_steps;
-                double y = p0.get_y() + j*(p1.get_y()-p0.get_y())/n_steps;
-                arm.inverseKinematic(x, y);
-                pwm1_vector.add(arm.get_pwm1());
-                pwm2_vector.add(arm.get_pwm2());
-                if (p0.get_pen()){ 
-                    pwm3_vector.add(1000);
-                }
-                else {
-                    pwm3_vector.add(2000);
-                }
-            }
-        }
-        
-    }
-
-    //save file with motor control values
-    public void save_pwm_file(String fname){
-        
-        for ( int i = 0 ; i < pwm1_vector.size(); i++){
-            UI.printf(" pwm1=%d pwm2=%d pwm3=%d\n",
-                pwm1_vector.get(i), pwm2_vector.get(i), pwm3_vector.get(i));
-        }
-
-        try {
-            //Whatever the file path is.
-            File statText = new File(fname);
-            FileOutputStream is = new FileOutputStream(statText);
-            OutputStreamWriter osw = new OutputStreamWriter(is);    
-            Writer w = new BufferedWriter(osw);
-            String str_out;
-            
-            for (int i = 1; i < pwm1_vector.size() ; i++){
-                if(i==1 && i==2 || i == pwm1_vector.size() - 1){
-                    str_out = String.format("%d,%d,%d\n",
-                    pwm1_vector.get(i), pwm2_vector.get(i), 2000);
-                }
-                else{
-                str_out = String.format("%d,%d,%d\n",
-                    pwm1_vector.get(i), pwm2_vector.get(i), pwm3_vector.get(i));
+                    str_out = path.get(i).get_x() +" "+ path.get(i).get_y() +" 0\n";
                 }
                 w.write(str_out);
             }
@@ -159,7 +120,41 @@ public class ToolPath
         } catch (IOException e) {
             UI.println("Problem writing to the file statsTest.txt");
         }
-        
+    }
+
+    public void load_path(String fname){
+        String  in_line = null;
+        try{
+            // open input stream test.txt for reading purpose.
+            BufferedReader in = new BufferedReader(new FileReader(new File(fname)));
+            // clear existing path
+            path.clear();
+
+            while ((in_line = in.readLine()) != null) {
+                UI.println(in_line);
+                String[] tokens = in_line.split(" ");
+                UI.println("Number of tokens in line " + in_line + ": " + tokens.length);
+                UI.println("The tokens are:");
+                UI.printf("%s %s %s\n",tokens[0],tokens[1],tokens[2]);
+                double x = Double.parseDouble(tokens[0]);
+                double y = Double.parseDouble(tokens[1]);
+                boolean pen = (Integer.parseInt(tokens[2]) == 1) ;
+                add_point_to_path(x,y,pen);
+            }       
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+
+    }
+
+    public int get_drawing_size() {
+        return path.size();
+    }
+
+    public PointXY get_drawing_point(int i){
+        PointXY p = path.get(i);
+        return p;
     }
 
 }
