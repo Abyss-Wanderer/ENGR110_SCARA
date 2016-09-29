@@ -137,65 +137,103 @@ public class Main{
     }
     
     public void drawHorizontalLine(){
-        drawing.add_point_to_path(220,160,false); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(220,155,false); // add point with pen down //220,160
+        arm.inverseKinematic(260, 155); // 214,160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(260,160,true); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(260,155,true); // add point with pen down //260, 160
+        arm.inverseKinematic(214, 155); //214, 160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(300,160,true); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(300,155,true); // add point with pen down // 300,160
+        arm.inverseKinematic(214, 155); // 214, 160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(340,160,true); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(340,155,true); // add point with pen down // 340,160
+        arm.inverseKinematic(214, 155); // 214, 160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(380,160,true); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(380,155,true); // add point with pen down // 380,160
+        arm.inverseKinematic(214, 155); // 214, 160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(420,160,true); // add point with pen down
-        arm.inverseKinematic(214, 160);
+        drawing.add_point_to_path(420,155,true); // add point with pen down // 420, 160
+        arm.inverseKinematic(214, 155); // 214, 160
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(450,160,true); // add point with pen down
-        arm.inverseKinematic(450, 160);
+        drawing.add_point_to_path(450,155,true); // add point with pen down // 450, 160
+        arm.inverseKinematic(450, 155); // 450, 160 
         arm.draw();
         drawing.draw();
         drawing.print_path();
     }
-
+    
+//    public void drawHorizontalLine(){
+//        drawing.add_point_to_path(220,210,false); // add point with pen down //220,210
+//        arm.inverseKinematic(214, 210); //214,2
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(260,210,true); // add point with pen down //260, 210
+//        arm.inverseKinematic(214, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(300,210,true); // add point with pen down
+//        arm.inverseKinematic(214, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(340,210,true); // add point with pen down
+//        arm.inverseKinematic(214, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(380,210,true); // add point with pen down
+//        arm.inverseKinematic(214, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(420,210,true); // add point with pen down
+//        arm.inverseKinematic(214, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(450,210,true); // add point with pen down
+//        arm.inverseKinematic(450, 210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//    }
+    
     public void drawSquare(){        
-        drawing.add_point_to_path(360,70,false); // add point with pen down
+        drawing.add_point_to_path(360,170,false); // add point with pen down //70
         arm.inverseKinematic(360, 70);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(420,70,true); // add point with pen down
+        drawing.add_point_to_path(420,170,true); // add point with pen down //70
         arm.inverseKinematic(420, 70);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(420,130,true); // add point with pen down
+        drawing.add_point_to_path(420,230,true); // add point with pen down //130
         arm.inverseKinematic(420,130);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(360,130,true); // add point with pen down
+        drawing.add_point_to_path(360,230,true); // add point with pen down
         arm.inverseKinematic(360,130);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(360,70,true); // add point with pen down
+        drawing.add_point_to_path(360,170,true); // add point with pen down
         arm.inverseKinematic(360,70);
         UI.clearGraphics();
         arm.draw();
@@ -203,10 +241,39 @@ public class Main{
         drawing.print_path();
     }
 
+//    public void drawSquare(){        
+//        drawing.add_point_to_path(360,120,false); // add point with pen down
+//        arm.inverseKinematic(360, 120);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(420,120,true); // add point with pen down
+//        arm.inverseKinematic(420, 120);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(420,180,true); // add point with pen down
+//        arm.inverseKinematic(420,180);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(360,180,true); // add point with pen down
+//        arm.inverseKinematic(360,180);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(360,120,true); // add point with pen down
+//        arm.inverseKinematic(360,120);
+//        UI.clearGraphics();
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//    }
+    
     public void drawCircle(){
         double r = 75/2;
-        int cx = 250;
-        int cy = 100;
+        int cx = 300; //250
+        int cy = 120; //100
         double x = cx + r*Math.cos(0);
         double y = cy + r*Math.sin(0);
         drawing.add_point_to_path(x,y,false); // add point with pen down
@@ -221,11 +288,11 @@ public class Main{
             drawing.print_path();
         }
     }
-
+    
     public void drawSkynet(){
         double r = 50/4;
-        int cx = 230;
-        int cy = 200;
+        int cx = 270; // 230
+        int cy = 150; // 200
         double x = cx + r*Math.cos(2*Math.PI);
         double y = cy + r*Math.sin(2*Math.PI);
         drawing.add_point_to_path(x,y,false); // add point with pen down
@@ -239,7 +306,7 @@ public class Main{
             drawing.draw();
             drawing.print_path();
         }
-        cy = 225;
+        cy = 175;
         for (double i = 3*Math.PI/2; i < 2*Math.PI; i=i+0.1){
             UI.clearGraphics();
             x = cx + r*Math.cos(i);
@@ -262,58 +329,49 @@ public class Main{
         }
         
         
-        drawing.add_point_to_path(260,190,false); // add point with pen down
-        arm.inverseKinematic(260,190);
+        drawing.add_point_to_path(300,140,false); // add point with pen down
+        arm.inverseKinematic(300,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(260,240,true); // add point with pen down
-        arm.inverseKinematic(260,240);
+        drawing.add_point_to_path(300,180,true); // add point with pen down
+        arm.inverseKinematic(300,180);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(260,225,false); // add point with pen down
-        arm.inverseKinematic(260,225);
+        drawing.add_point_to_path(300,175,false); // add point with pen down
+        arm.inverseKinematic(300,175);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(290,190,true); // add point with pen down
-        arm.inverseKinematic(290,190);
+        drawing.add_point_to_path(330,140,true); // add point with pen down
+        arm.inverseKinematic(330,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(260,225,false); // add point with pen down
-        arm.inverseKinematic(260,225);
+        drawing.add_point_to_path(300,175,false); // add point with pen down
+        arm.inverseKinematic(300,175);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(290,240,true); // add point with pen down
-        arm.inverseKinematic(290,240);
+        drawing.add_point_to_path(330,190,true); // add point with pen down
+        arm.inverseKinematic(330,190);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(300,190,false); // add point with pen down
-        arm.inverseKinematic(300,190);
+        //y??
+        drawing.add_point_to_path(340,140,false); // add point with pen down
+        arm.inverseKinematic(340,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(315,210,true); // add point with pen down
-        arm.inverseKinematic(300,210);
+        drawing.add_point_to_path(355,160,true); // add point with pen down
+        arm.inverseKinematic(355,160);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(330,190,false); // add point with pen down
-        arm.inverseKinematic(300,190);
-        arm.draw();
-        drawing.draw();
-        drawing.print_path();
-        drawing.add_point_to_path(300,240,true); // add point with pen down
-        arm.inverseKinematic(300,240);
-        arm.draw();
-        drawing.draw();
-        drawing.print_path();
-        drawing.add_point_to_path(340,240,false); // add point with pen down
-        arm.inverseKinematic(300,190);
+        drawing.add_point_to_path(370,140,false); // add point with pen down
+        arm.inverseKinematic(370,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
@@ -322,52 +380,53 @@ public class Main{
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(370,240,true); // add point with pen down
-        arm.inverseKinematic(370,240);
-        arm.draw();
-        drawing.draw();
-        drawing.print_path();
-        drawing.add_point_to_path(370,190,true); // add point with pen down
-        arm.inverseKinematic(370,190);
-        arm.draw();
-        drawing.draw();
-        drawing.print_path();
-        drawing.add_point_to_path(410,190,false); // add point with pen down
-        arm.inverseKinematic(410,190);
-        arm.draw();
-        drawing.draw();
-        drawing.print_path();
-        drawing.add_point_to_path(380,190,true); // add point with pen down
+        //n?
+        drawing.add_point_to_path(380,190,false); // add point with pen down
         arm.inverseKinematic(380,190);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(380,215,true); // add point with pen down
-        arm.inverseKinematic(380,215);
+        drawing.add_point_to_path(380,140,true); // add point with pen down
+        arm.inverseKinematic(380,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(410,215,false);
-        arm.inverseKinematic(410,215);
+        drawing.add_point_to_path(410,190,true); // add point with pen down
+        arm.inverseKinematic(410,190);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(380,215,true);
-        arm.inverseKinematic(380,215);
+        drawing.add_point_to_path(410,140,true); // add point with pen down
+        arm.inverseKinematic(410,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(380,240,true);
-        arm.inverseKinematic(380,240);
+        drawing.add_point_to_path(450,140,false); // add point with pen down
+        arm.inverseKinematic(450,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(410,240,true);
-        arm.inverseKinematic(410,240);
+        drawing.add_point_to_path(420,140,true); // add point with pen down
+        arm.inverseKinematic(420,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(420,190,false);
+        drawing.add_point_to_path(420,165,true); // add point with pen down
+        arm.inverseKinematic(420,165);
+        arm.draw();
+        drawing.draw();
+        drawing.print_path();
+        drawing.add_point_to_path(450,165,false);
+        arm.inverseKinematic(450,165);
+        arm.draw();
+        drawing.draw();
+        drawing.print_path();
+        drawing.add_point_to_path(420,165,true);
+        arm.inverseKinematic(420,165);
+        arm.draw();
+        drawing.draw();
+        drawing.print_path();
+        drawing.add_point_to_path(420,190,true);
         arm.inverseKinematic(420,190);
         arm.draw();
         drawing.draw();
@@ -377,41 +436,209 @@ public class Main{
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(435,190,false);
-        arm.inverseKinematic(435,190);
+        drawing.add_point_to_path(460,140,false);
+        arm.inverseKinematic(460,140);
         arm.draw();
         drawing.draw();
         drawing.print_path();
-        drawing.add_point_to_path(435,240,true);
-        arm.inverseKinematic(435,240);
+        drawing.add_point_to_path(490,140,true);
+        arm.inverseKinematic(490,140);
+        arm.draw();
+        drawing.draw();
+        drawing.print_path();
+        drawing.add_point_to_path(475,140,false);
+        arm.inverseKinematic(475,140);
+        arm.draw();
+        drawing.draw();
+        drawing.print_path();
+        drawing.add_point_to_path(475,190,true);
+        arm.inverseKinematic(475,190);
         arm.draw();
         drawing.draw();
         drawing.print_path();
     }
 
-//    public void drawSquare(){        
-//        drawing.add_point_to_path(270,90,true); // add point with pen down
-//        arm.inverseKinematic(270, 90);
+//    public void drawCircle(){
+//        double r = 75/2;
+//        int cx = 250;
+//        int cy = 150;
+//        double x = cx + r*Math.cos(0);
+//        double y = cy + r*Math.sin(0);
+//        drawing.add_point_to_path(x,y,false); // add point with pen down
+//        for (double i = 0; i < 2*Math.PI; i=i+0.1){
+//            UI.clearGraphics();
+//            x = cx + r*Math.cos(i);
+//            y = cy + r*Math.sin(i);
+//            drawing.add_point_to_path(x,y,true); // add point with pen down
+//            arm.inverseKinematic(x, y);
+//            arm.draw();
+//            drawing.draw();
+//            drawing.print_path();
+//        }
+//    }
+
+//    public void drawSkynet(){
+//        double r = 50/4;
+//        int cx = 230;
+//        int cy = 200;
+//        double x = cx + r*Math.cos(2*Math.PI);
+//        double y = cy + r*Math.sin(2*Math.PI);
+//        drawing.add_point_to_path(x,y,false); // add point with pen down
+//        for (double i = 2*Math.PI; i > 0.5*Math.PI; i=i-0.1){
+//            UI.clearGraphics();
+//            x = cx + r*Math.cos(i);
+//            y = cy + r*Math.sin(i);
+//            drawing.add_point_to_path(x,y,true); // add point with pen down
+//            arm.inverseKinematic(x, y);
+//            arm.draw();
+//            drawing.draw();
+//            drawing.print_path();
+//        }
+//        cy = 225;
+//        for (double i = 3*Math.PI/2; i < 2*Math.PI; i=i+0.1){
+//            UI.clearGraphics();
+//            x = cx + r*Math.cos(i);
+//            y = cy + r*Math.sin(i);
+//            drawing.add_point_to_path(x,y,true); // add point with pen down
+//            arm.inverseKinematic(x, y);
+//            arm.draw();
+//            drawing.draw();
+//            drawing.print_path();
+//        }
+//        for (double i = 0; i < Math.PI; i=i+0.1){
+//            UI.clearGraphics();
+//            x = cx + r*Math.cos(i);
+//            y = cy + r*Math.sin(i);
+//            drawing.add_point_to_path(x,y,true); // add point with pen down
+//            arm.inverseKinematic(x, y);
+//            arm.draw();
+//            drawing.draw();
+//            drawing.print_path();
+//        }
+//        
+//        
+//        drawing.add_point_to_path(260,190,false); // add point with pen down
+//        arm.inverseKinematic(260,190);
 //        arm.draw();
 //        drawing.draw();
 //        drawing.print_path();
-//        drawing.add_point_to_path(300,90,true); // add point with pen down
-//        arm.inverseKinematic(300, 90);
+//        drawing.add_point_to_path(260,240,true); // add point with pen down
+//        arm.inverseKinematic(260,240);
 //        arm.draw();
 //        drawing.draw();
 //        drawing.print_path();
-//        drawing.add_point_to_path(300,110,true); // add point with pen down
-//        arm.inverseKinematic(300,110);
+//        drawing.add_point_to_path(260,225,false); // add point with pen down
+//        arm.inverseKinematic(260,225);
 //        arm.draw();
 //        drawing.draw();
 //        drawing.print_path();
-//        drawing.add_point_to_path(270,110,true); // add point with pen down
-//        arm.inverseKinematic(270,110);
+//        drawing.add_point_to_path(290,190,true); // add point with pen down
+//        arm.inverseKinematic(290,190);
 //        arm.draw();
 //        drawing.draw();
 //        drawing.print_path();
-//        drawing.add_point_to_path(270,90,true); // add point with pen down
-//        arm.inverseKinematic(270,90);
+//        drawing.add_point_to_path(260,225,false); // add point with pen down
+//        arm.inverseKinematic(260,225);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(290,240,true); // add point with pen down
+//        arm.inverseKinematic(290,240);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(300,190,false); // add point with pen down
+//        arm.inverseKinematic(300,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(315,210,true); // add point with pen down
+//        arm.inverseKinematic(300,210);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(330,190,false); // add point with pen down
+//        arm.inverseKinematic(300,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(300,240,true); // add point with pen down
+//        arm.inverseKinematic(300,240);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(340,240,false); // add point with pen down
+//        arm.inverseKinematic(300,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(340,190,true); // add point with pen down
+//        arm.inverseKinematic(340,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(370,240,true); // add point with pen down
+//        arm.inverseKinematic(370,240);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(370,190,true); // add point with pen down
+//        arm.inverseKinematic(370,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(410,190,false); // add point with pen down
+//        arm.inverseKinematic(410,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(380,190,true); // add point with pen down
+//        arm.inverseKinematic(380,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(380,215,true); // add point with pen down
+//        arm.inverseKinematic(380,215);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(410,215,false);
+//        arm.inverseKinematic(410,215);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(380,215,true);
+//        arm.inverseKinematic(380,215);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(380,240,true);
+//        arm.inverseKinematic(380,240);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(410,240,true);
+//        arm.inverseKinematic(410,240);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(420,190,false);
+//        arm.inverseKinematic(420,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(450,190,true);
+//        arm.inverseKinematic(450,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(435,190,false);
+//        arm.inverseKinematic(435,190);
+//        arm.draw();
+//        drawing.draw();
+//        drawing.print_path();
+//        drawing.add_point_to_path(435,240,true);
+//        arm.inverseKinematic(435,240);
 //        arm.draw();
 //        drawing.draw();
 //        drawing.print_path();
