@@ -58,6 +58,7 @@ public class Arm
     public Arm()
     {
         xm1 = 290; // set motor coordinates
+
         ym1 = 373;
         xm2 = 368;
         ym2 = 374;
@@ -261,13 +262,17 @@ public class Arm
     }
 
     public void pwmConvert1(double theta1){
-        pwm1=(int)(1410+((theta1-1.74533)*((1690-1410)/(2.191911-1.74533))));
+        pwm1=(int)(1400+((theta1-1.78024)*((1690-1400)/(2.21657-1.78024))));
+        //        pwm1=(int)(1410+((theta1-1.74533)*((1690-1410)/(2.191911-1.74533))));
+
 
     }
 
     public void pwmConvert2(double theta2){
-        pwm2=(int)(1400+((theta2-0.925025)*((1500-1400)/(1.09956-0.925025))));
+        pwm2=(int)(1300+((theta2-0.523599)*((1590-1300)/(1.01229-0.523599))));
+        //pwm2=(int)(1400+((theta2-0.925025)*((1500-1400)/(1.09956-0.925025))));
 
+        
     }
     
     // returns motor control signal
