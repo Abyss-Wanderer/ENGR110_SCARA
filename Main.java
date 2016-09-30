@@ -38,7 +38,6 @@ public class Main{
         UI.addButton("Circle", this::drawCircle);
         UI.addButton("Square", this::drawSquare);
         UI.addButton("Skynet", this::drawSkynet);
-        UI.addButton("Snowman", ()->{drawing.changeShowSnowman();});
 
         UI.addButton("Quit", UI::quit);
         UI.setMouseMotionListener(this::doMouse);
